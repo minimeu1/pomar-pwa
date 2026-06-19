@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomar App</title>
+  manifest.json
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🍎 Registo Pomar</h1>
+
+<div class="section">
+  <button onclick="setFruta('maca')">🍎 Maçã</button>
+  <button onclick="setFruta('pera')">🍐 Pêra</button>
+</div>
+
+<div class="section">
+  <button onclick="setZona('NORTE')">Norte</button>
+  <button onclick="setZona('SUL')">Sul</button>
+</div>
+
+<div class="section">
+  <input type="number" id="linha" placeholder="Linha" />
+</div>
+
+<div class="section">
+  <input type="text" id="obs" placeholder="Observações" />
+</div>
+
+<div class="section">
+  <button onclick="registar()">✅ Registar</button>
+  <button onclick="registarIgual()">🔁 Igual</button>
+</div>
+
+<div class="section">
+  <button onclick="exportCSV()">⬇ Exportar CSV</button>
+</div>
+
+<script src="db.js"></script>
+<script src="app.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
+
+</body>
+</html>
