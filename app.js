@@ -4,17 +4,28 @@ let ultimo = null;
 
 function setFruta(f) {
   fruta = f;
-  console.log('Fruta:', f);
+  clearSelections('fruta-btn');
+  document.getElementById(`fruta-${f}`).classList.add('selected');
+}
+
+function clearSelections(type) {
+  const buttons = document.querySelectorAll(`.${type}`);
+  buttons.forEach(b => b.classList.remove('selected'));
 }
 
 function setZona(z) {
   zona = z;
-  console.log('Zona:', z);
+  clearSelections('zona-btn');
+  document.getElementById(`zona-${z}`).classList.add('selected');
 }
 
 function registar() {
   const linha = document.getElementById('linha').value;
   const obs = document.getElementById('obs').value;
+
+  if (navigator.vibrate) {
+    navigator.vibrate(100);
+  }
 
   if (!fruta || !zona || !linha) {
     alert('Preencher tudo');
@@ -59,5 +70,29 @@ function exportCSV() {
     a.href = url;
     a.download = 'registos.csv';
     a.click();
+  });
+}
+
+function apagarUltimo() {
+  if (!ultimo) {
+    alert("Sem registos recentes");
+    return;
+  }
+
+  db_delete(ultimo.id);
+  ultimo = null;
+}
+
+function verUltimos() {
+  db_getAll().then(data => {
+    const ultimos = data.slice(-5).reverse();
+
+    let txt = "Últimos registos:\\n\\n";
+
+    ultimos.forEach(r => {
+      txt += `${r.fruta} | ${r.zona} | L${r.linha}\\n`;
+    });
+
+    alert(txt);
   });
 }

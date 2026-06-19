@@ -28,3 +28,8 @@ function db_getAll() {
     req.onsuccess = () => resolve(req.result);
   });
 }
+
+function db_delete(id) {
+  const tx = db.transaction(STORE, 'readwrite');
+  tx.objectStore(STORE).delete(id);
+}

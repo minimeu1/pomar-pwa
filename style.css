@@ -20,3 +20,8 @@ input {
   padding: 10px;
   width: 80%;
 }
+
+.selected {
+  background-color: #4CAF50;
+  color: white;
+}
